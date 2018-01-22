@@ -34,5 +34,11 @@ Nodes can be used to generate positive or negative Kibana filters.
 #### Consistent Colors
 Consistent colors for nodes are automatically seeded by the key-value with no user interaction.
 
-###### Enhanced Fork of the awesome [kbn_network](https://dlumbrer.github.io/kbn_network/)
+
+## Acknowledgement
+
+Plugin Based on a Fork of the awesome [kbn_network](https://dlumbrer.github.io/kbn_network/)
+
+Elasticsearch and Kibana are trademarks of Elasticsearch BV, registered in the U.S. and in other countries.
+
 
