@@ -1,6 +1,6 @@
 # Graph Network Plugin for Kibana 5.5.X
 
-Kibana plugin producing interactive [VisJS](http://visjs.org/docs/network) Graph Visualization from Elastic aggregations.
+Kibana plugin to Visualize aggregations as an interactive [VisJS](http://visjs.org/docs/network) Graph network of related nodes.
 
 ##### Ideal companion of [gun](https://github.com/amark/gun), examples available at [gun-elastic](https://github.com/lmangani/gun-elastic)
 

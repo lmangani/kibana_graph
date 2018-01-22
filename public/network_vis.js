@@ -6,7 +6,6 @@ import { VisSchemasProvider } from 'ui/vis/schemas';
 import networkVisTemplate from 'plugins/graph_vis/network_vis.html';
 import networkVisParamsTemplate from 'plugins/graph_vis/network_vis_params.html';
 
-
 // register the provider with the visTypes registry
 VisTypesRegistryProvider.register(NetworkVisTypeProvider);
 
@@ -19,8 +18,8 @@ function NetworkVisTypeProvider(Private) {
   return new TemplateVisType({
     name: 'network',
     title: 'Network',
-    icon: 'fa-cogs',
-    description: 'Displays a network node that link two fields that have been selected.',
+    icon: 'fa-share-alt',
+    description: 'Displays aggregations as an interactive Graph network of related nodes.',
     template: networkVisTemplate,
     params: {
       defaults: {
@@ -71,7 +70,7 @@ function NetworkVisTypeProvider(Private) {
         group: 'metrics',
         name: 'size_edge',
         title: 'Edge Size',
-        max: 1,
+        max: 1
       },
       {
         group: 'buckets',
