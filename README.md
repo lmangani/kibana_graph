@@ -1,4 +1,4 @@
-![image](https://user-images.githubusercontent.com/1423657/35244908-15f41bd4-ffc2-11e7-9303-9a87a271d67a.png)
+<img width=222 src="https://user-images.githubusercontent.com/1423657/35244908-15f41bd4-ffc2-11e7-9303-9a87a271d67a.png"/>
 # Graph Network Plugin for Kibana 5.5.X
 
 Kibana plugin to Visualize aggregations as an interactive [VisJS](http://visjs.org/docs/network) Graph network of related nodes.
