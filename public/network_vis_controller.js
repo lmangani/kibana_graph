@@ -16,7 +16,7 @@ const ResizeSensor = require('css-element-queries/src/ResizeSensor');
 
 // add a controller to the module, which will transform the esResponse into a
 // tabular format that we can pass to the table directive
-module.controller('KbnNetworkVisController', function ($scope, $sce, getAppState, Private) {
+module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
     var network_id = "net_" + $scope.$id;
     var loading_id = "loading_" + $scope.$parent.$id;
 
@@ -35,20 +35,14 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, getAppState
     }
 
     $scope.initialShows = function(){
-      $("#" + network_id).show();
-      $("#" + loading_id).show();
+      $("#net").show();
+      $("#loading").show();
       $("#errorHtml").hide();
     }
 
     $scope.startDynamicResize = function(network){
-        for (var i = 0; i < $(".vis-container" ).length; i++) {
-            if($(".vis-container")[i].children[0].children[1] && $(".vis-container")[i].children[0].children[1].id == network_id){
-                var viscontainer = $(".vis-container")[i];
-                break;
-            }
-        };
-        new ResizeSensor(viscontainer, function() {
-            network.setSize('100%', viscontainer.clientHeight);
+        new ResizeSensor($("#net"), function() {
+            network.setSize('100%', '100%');
         });
     }
 
@@ -74,9 +68,9 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, getAppState
         }
     }
 
-    $scope.$watchMulti(['esResponse', 'vis.params'], function ([resp]) {
+    $scope.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp]) {
         if (resp) {
-            $("#" + loading_id).hide();
+            $("#loading").hide();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////NODE-NODE-RELATION Type///////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -418,9 +412,9 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, getAppState
 			  return false;
      			});
 		}
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             }else{
-                $scope.errorCustom('Error: Please select at least one Node',1);
+		$scope.errorCustom('Error: Please select at least one Node',1);
             }
         }
     });
