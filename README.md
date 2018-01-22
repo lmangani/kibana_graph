@@ -13,6 +13,11 @@ git clone https://github.com/lmangani/kbn_graph graph_vis
 cd graph_vis
 npm install
 ```
+### Archive Install
+Replace the link with your [release](https://github.com/lmangani/kibana_graph/releases) of choice:
+```
+kibana-plugin install https://github.com/lmangani/kibana_graph/releases/download/5.5.x/graph_vis-5.5.0.zip
+```
 
 ### Usage
 * Choose an index
