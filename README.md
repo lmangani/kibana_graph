@@ -1,11 +1,12 @@
 <img width=222 src="https://user-images.githubusercontent.com/1423657/35244908-15f41bd4-ffc2-11e7-9303-9a87a271d67a.png"/>
-# Graph Network Plugin for Kibana 5.5.X
+
+## Graph Network Plugin for Kibana 5.5.X
 
 Kibana plugin to Visualize aggregations as an interactive [VisJS](http://visjs.org/docs/network) Graph network of related nodes.
 
 ##### Ideal companion of [gun](https://github.com/amark/gun), examples available at [gun-elastic](https://github.com/lmangani/gun-elastic)
 
-## Git Install
+### Git Install
 ```
 cd $KIBANA_HOME/plugins
 git clone https://github.com/lmangani/kbn_graph graph_vis
@@ -13,7 +14,7 @@ cd graph_vis
 npm install
 ```
 
-## Usage
+### Usage
 * Choose an index
 * Select a cascading set of Terms aggregations
 * Hit Play
@@ -36,7 +37,7 @@ Nodes can be used to generate positive or negative Kibana filters.
 Consistent colors for nodes are automatically seeded by the key-value with no user interaction.
 
 
-## Acknowledgement
+### Acknowledgement
 
 Plugin Based on a Fork of the awesome [kbn_network](https://dlumbrer.github.io/kbn_network/)
 
