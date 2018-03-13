@@ -68,8 +68,8 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
         }
     }
 
-    $scope.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp]) {
-        if (resp) {
+    $scope.$watchMulti(['esResponse', 'vis.params.secondNodeColor', 'searchSource.rawResponse'], function ([resp]) {
+        if (resp||$scope.searchSource.rawResponse) {
             $("#loading").hide();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////NODE-NODE-RELATION Type///////////////////////////////////////////////////////////////////
@@ -125,7 +125,12 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
    		};
 
 		try {
-			var tableGroups = tabifyAggResponse($scope.vis, resp);
+			var tableGroups = tabifyAggResponse($scope.vis, $scope.searchSource.rawResponse, {
+			    canSplit: false,
+			    asAggConfigResults: true,
+			    partialRows: true
+			 });
+			
 		} catch(e) { $scope.errorCustom('tablegroup error',e); }
 
 
