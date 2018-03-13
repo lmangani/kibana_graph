@@ -1,9 +1,6 @@
 {
   "name": "graph_vis",
-  "version": "5.5.0-1",
-  "kibana": {
-    "version": "kibana"
-  },
+  "version": "6.2.2",
   "authors": [
   "David Moreno Lumbreras <dmorenolumb@gmail.com>",
   "Lorenzo Mangani <lorenzo.mangani@gmail.com>"
