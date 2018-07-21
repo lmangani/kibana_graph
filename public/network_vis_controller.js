@@ -67,7 +67,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
             p = p +22;
         }
     }
-    $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp]) {
+    $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp, req]) {
 	  if (resp && $scope.vis ) {
           $timeout(function () {
             $("#loading").hide();
@@ -108,7 +108,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 		var dataMetrics = $scope.dataMetrics = [];
 		    
 		$scope.processTableGroups = function(tableGroups) {
-		  console.log('Ingesting tableGroups...',tableGroups);
+		  console.log('Ingesting tableGroups...',tableGroups, req);
 		  if (!tableGroups) return;
    		  tableGroups.tables.forEach(function (table) {
    		    table.rows.forEach(function (row, i) {
@@ -218,14 +218,15 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 //////////////// BUCKET SCANNER ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		try {
 			$scope.processTableGroups($scope.tableGroups);
-			// buckeroo(resp.aggregations);
-			buckeroo(resp.tables[0].rows);
+			if (req && req.resp && req.resp.aggregations) buckeroo(req.resp.aggregations);
+			else buckeroo(resp.tables[0].rows);
 		} catch(e) {
 	                $scope.errorCustom('OOps! Aggs to Graph error: '+e);
 			return;
 		}
 //////////////////////////////////////////////////////////Creation of the network with the library//////////////////////////////////////////////////////////
 		console.log('Building Vis',dataNodes,dataEdges);
+		    
 		var nodesDataSet = new visN.DataSet(dataNodes);
                 var edgesDataSet = new visN.DataSet(dataEdges);
 
