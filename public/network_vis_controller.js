@@ -67,9 +67,8 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
             p = p +22;
         }
     }
-    $scope.$watchMulti(['esResponse',  'searchSource.rawResponse', 'vis.params.secondNodeColor'], function ([resp]) {
+    $scope.$watchMulti(['esResponse',  'vis.params.secondNodeColor'], function ([resp]) {
    // $scope.$watchMulti(['esResponse', 'vis.params.secondNodeColor', 'searchSource.rawResponse'], function ([resp]) {
-	    $scope.table = null;
 	    if (resp||$scope.searchSource.rawResponse) {
             $("#loading").hide();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,13 +125,13 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
    		};
 
 		try {
-			var tableGroups = tabifyAggResponse($scope.vis, $scope.searchSource.rawResponse, {
+			var tableGroups = tabifyAggResponse($scope.vis, $scope.searchSource.rawResponse || resp, {
 			    canSplit: false,
 			    asAggConfigResults: true,
 			    partialRows: true
 			 });
 			
-		} catch(e) { $scope.errorCustom('tablegroup error',e); }
+		} catch(e) { $scope.errorCustom('tablegroup error',e,  $scope.searchSource.rawResponse); }
 
 
 		var buckeroo = function(data,akey,bkey){
