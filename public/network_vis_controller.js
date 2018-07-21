@@ -130,15 +130,15 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
    		};
 
 		try {
-			$scope.errorCustom('Attempting Tabify',$scope.searchSource);
-			var tableGroups = tabifyAggResponse($scope.vis, $scope.searchSource.rawResponse, {
+			$scope.errorCustom('Attempting Tabify');
+			var tableGroups = tabifyAggResponse($scope.vis, resp, {
 			    canSplit: false,
 			    asAggConfigResults: true,
 			    partialRows: true
 			 });
 			
 		} catch(e) { 
-			$scope.errorCustom('tablegroup error', e, $scope.searchSource.rawResponse); 
+			$scope.errorCustom('tablegroup error', e, resp); 
 			var tableGroups = null; 
 		}
 
