@@ -111,9 +111,9 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 
 		var dataMetrics = $scope.dataMetrics = [];
 		    
-		$scope.processTableGroups = function (tableGroups) {
-		  console.log('Ingesting tableGroups',tableGroups);
-		  if (!tableGroups.tables) return;
+		$scope.processTableGroups = function(tableGroups) {
+		  console.log('Ingesting tableGroups...',tableGroups);
+		  if (!tableGroups) return;
    		  tableGroups.tables.forEach(function (table) {
    		    table.rows.forEach(function (row, i) {
 			row.forEach(function (item, r){
@@ -132,15 +132,18 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
    		};
 
 		try {
-			if (!$scope.vis,resp) {
+			if (!$scope.vis && !resp) {
 				console.log('no data for agg tabify!',$scope.vis,resp);
 			}
+			$scope.tableGroups = resp;
+			/*
 			$scope.tableGroups = tabifyAggResponse($scope.vis, resp, {
 			    canSplit: false,
 			    asAggConfigResults: true,
 			    partialRows: true
 			 });
-			 console.log('tabifyAggResponse result',$scope.tableGroups);
+			*/
+			console.log('tabifyAggResponse result',$scope.tableGroups);
 			
 		} catch(e) { 
 			$scope.errorCustom('tabifyAggResponse error! '+ e); 
