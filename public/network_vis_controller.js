@@ -67,15 +67,14 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
             p = p +22;
         }
     }
-    $scope.$parent.$watchMulti($scope, ['esResponse',  'vis.params.secondNodeColor', 'searchSource.rawResponse', 'vis'], function () {
+    $scope.$parent.$watchMulti(['esResponse',  'vis.params.secondNodeColor', 'searchSource.rawResponse'], function ([resp]) {
     //$scope.$watchMulti(['esResponse',  'vis.params.secondNodeColor', 'searchSource.rawResponse', 'vis'], function () {
-	  console.log('Changes detected, processing...',$scope);
+	  console.log('Changes detected, processing...',$scope,resp,$scope.searchSource);
 	  if (!$scope.esResponse || !$scope.vis || !$scope.searchSource ) {
              $("#loading").hide();  
 	     $scope.errorCustom('No results from Tabify!', $scope.searchSource.rawResponse);
 	    
           } else if ($scope.esResponse && $scope.searchSource ) {
-            var resp = $scope.esResponse;
             $("#loading").hide();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////NODE-NODE-RELATION Type///////////////////////////////////////////////////////////////////
