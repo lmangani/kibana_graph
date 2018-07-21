@@ -68,11 +68,12 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
         }
     }
     $scope.$watchMulti(['esResponse',  'vis.params.secondNodeColor', 'searchSource.rawResponse', 'vis'], function () {
-	  if (!$scope.vis && !$scope.searchSource ) {
-             $scope.table = null;
-	     $scope.errorCustom('No results from Tabify!',$scope.searchSource.rawResponse);
-	     $("#loading").hide();  
-          } else if ($scope.esResponse && $scope.vis && $scope.searchSource ) {
+	  console.log('Changes detected, processing...',$scope);
+	  if (!$scope.esResponse || !$scope.vis || !$scope.searchSource ) {
+             $("#loading").hide();  
+	     $scope.errorCustom('No results from Tabify!', $scope.searchSource.rawResponse);
+	    
+          } else if ($scope.esResponse && $scope.searchSource ) {
             var resp = $scope.esResponse;
             $("#loading").hide();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
