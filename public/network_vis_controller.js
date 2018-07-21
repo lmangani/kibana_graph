@@ -67,9 +67,11 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
             p = p +22;
         }
     }
-
-    $scope.$watchMulti(['esResponse', 'vis.params.secondNodeColor', 'searchSource.rawResponse'], function ([resp]) {
-        if (resp||$scope.searchSource.rawResponse) {
+    $scope.$watchMulti.call($scope, [ 'vis', 'searchSource.rawResponse','esResponse', 'vis.params.secondNodeColor'], function () {
+   // $scope.$watchMulti(['esResponse', 'vis.params.secondNodeColor', 'searchSource.rawResponse'], function ([resp]) {
+	    var resp = $scope.esResponse;
+	    $scope.table = null;
+	    if (resp||$scope.searchSource.rawResponse) {
             $("#loading").hide();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////NODE-NODE-RELATION Type///////////////////////////////////////////////////////////////////
