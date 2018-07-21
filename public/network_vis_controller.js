@@ -69,6 +69,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
     }
     $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp]) {
 	  console.log('Graph settings detected, processing...',$scope, resp);
+	  $scope.vis = $scope.$parent.vis;
 	  if (!resp || !$scope.vis ) {
              $("#loading").hide();  
 	     $scope.errorCustom('No results from Tabify!');
