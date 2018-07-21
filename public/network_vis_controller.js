@@ -245,7 +245,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
                     edges: edgesDataSet
                 };
                 //Set the Options
-                var options = {
+                var options_1 = {
                     height: container.getBoundingClientRect().height.toString(),
                     physics: {
                         barnesHut: {
@@ -254,22 +254,15 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
                             springLength: 500
                         }
                     },
-                    edges: {
-                        arrows: {
-                            to: {
-                                enabled: $scope.vis.params.displayArrow,
-                                scaleFactor: $scope.vis.params.scaleArrow,
-                                type: $scope.vis.params.shapeArrow
+		    edges:{
+                            arrowStrikethrough: false,
+                            smooth: {
+                                type: $scope.vis.params.smoothType
+                            },
+                            scaling:{
+                                min:$scope.vis.params.minEdgeSize,
+                                max:$scope.vis.params.maxEdgeSize
                             }
-                        },
-                        arrowStrikethrough: false,
-                        smooth: {
-                            type: $scope.vis.params.smoothType
-                        },
-                        scaling:{
-                            min:$scope.vis.params.minEdgeSize,
-                            max:$scope.vis.params.maxEdgeSize
-                        }
                     },
                     interaction: {
                         hideEdgesOnDrag: $scope.vis.params.hideEdgesOnDrag,
@@ -286,6 +279,61 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
                         improvedLayout: false
                     }
                 }
+		switch ($scope.vis.params.posArrow) {
+                        case 'from':
+                            var options_2 = {
+                                edges:{
+                                    arrows: {
+                                        from: {
+                                            enabled: $scope.vis.params.displayArrow,
+                                            scaleFactor: $scope.vis.params.scaleArrow,
+                                            type: $scope.vis.params.shapeArrow
+                                        }
+                                    }
+                                }
+                            };
+                            break;
+                        case 'middle':
+                            var options_2 = {
+                                edges:{
+                                    arrows: {
+                                        middle: {
+                                            enabled: $scope.vis.params.displayArrow,
+                                            scaleFactor: $scope.vis.params.scaleArrow,
+                                            type: $scope.vis.params.shapeArrow
+                                        }
+                                    }
+                                }
+                            };
+                            break;
+                        case 'to':
+                            var options_2 = {
+                                edges:{
+                                    arrows: {
+                                        to: {
+                                            enabled: $scope.vis.params.displayArrow,
+                                            scaleFactor: $scope.vis.params.scaleArrow,
+                                            type: $scope.vis.params.shapeArrow
+                                        }
+                                    }
+                                }
+                            };
+                            break;
+                        default:
+                            var options_2 = {
+                                edges:{
+                                    arrows: {
+                                        from: {
+                                            enabled: $scope.vis.params.displayArrow,
+                                            scaleFactor: $scope.vis.params.scaleArrow,
+                                            type: $scope.vis.params.shapeArrow
+                                        }
+                                    }
+                                }
+                            };
+                            break;
+                }
+		var options = angular.merge(options_1, options_2);    
                 console.log("Create aggs network now");
                 var network = new visN.Network(container, data, options);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
