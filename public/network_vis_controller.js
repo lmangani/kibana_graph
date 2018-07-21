@@ -67,8 +67,9 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
             p = p +22;
         }
     }
-    $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor', 'req', 'searchSource'], function ([resp, secondNodeColor, req, searchSource]) {
-	  if (resp && $scope.vis ) {
+    $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp, secondNodeColor]) {
+	if (resp && $scope.vis ) {
+	  var rawResponse = $scope.vis.aggs.toDsl();
           $timeout(function () {
             $("#loading").hide();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -218,7 +219,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 //////////////// BUCKET SCANNER ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		try {
 			$scope.processTableGroups($scope.tableGroups);
-			if (req && req.resp && req.resp.aggregations) buckeroo(req.resp.aggregations);
+			if (rawResponse) buckeroo(rawResponse);
 			else buckeroo(resp.tables[0].rows);
 		} catch(e) {
 	                $scope.errorCustom('OOps! Aggs to Graph error: '+e);
