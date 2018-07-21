@@ -67,7 +67,8 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
             p = p +22;
         }
     }
-    $scope.$watchMulti(['esResponse',  'vis.params.secondNodeColor', 'searchSource.rawResponse', 'vis'], function () {
+    $scope.$parent.$watchMulti($scope, ['esResponse',  'vis.params.secondNodeColor', 'searchSource.rawResponse', 'vis'], function () {
+    //$scope.$watchMulti(['esResponse',  'vis.params.secondNodeColor', 'searchSource.rawResponse', 'vis'], function () {
 	  console.log('Changes detected, processing...',$scope);
 	  if (!$scope.esResponse || !$scope.vis || !$scope.searchSource ) {
              $("#loading").hide();  
