@@ -68,12 +68,8 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
         }
     }
     $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp]) {
-	  console.log('Graph settings detected, processing...',$scope, resp);
-	  $scope.vis = $scope.$parent.vis;
-	  if (!resp || !$scope.vis ) {
-             $("#loading").hide();  
-	     $scope.errorCustom('No results from Tabify!');
-          } else if (resp && $scope.vis ) {
+	  if (resp && $scope.vis ) {
+          $timeout(function () {
             $("#loading").hide();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////NODE-NODE-RELATION Type///////////////////////////////////////////////////////////////////
@@ -436,6 +432,9 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
             }else{
 		$scope.errorCustom('Error: Please select at least one Node',1);
             }
+		  
+	  // $timeout tail	  
+	  });
         }
     });
 });
