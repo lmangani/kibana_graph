@@ -67,9 +67,8 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
             p = p +22;
         }
     }
-    $scope.$parent.$watchMulti(['esResponse',  'vis.params.secondNodeColor'], function ([resp]) {
-    //$scope.$watchMulti(['esResponse',  'vis.params.secondNodeColor', 'searchSource.rawResponse', 'vis'], function () {
-	  console.log('Changes detected, processing...',$scope, resp);
+    $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp]) {
+	  console.log('Graph settings detected, processing...',$scope, resp);
 	  if (!resp || !$scope.vis ) {
              $("#loading").hide();  
 	     $scope.errorCustom('No results from Tabify!');
@@ -110,6 +109,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 		}
 
 		var dataMetrics = $scope.dataMetrics = [];
+		    
 		$scope.processTableGroups = function (tableGroups) {
    		  tableGroups.tables.forEach(function (table) {
    		    table.rows.forEach(function (row, i) {
@@ -129,18 +129,16 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
    		};
 
 		try {
-			$scope.errorCustom('Attempting Tabify');
-			var tableGroups = tabifyAggResponse($scope.vis, resp, {
+			$scope.tableGroups = tabifyAggResponse($scope.vis, resp, {
 			    canSplit: false,
 			    asAggConfigResults: true,
 			    partialRows: true
 			 });
+			 console.log('tabifyAggResponse result',$scope.tableGroups);
 			
 		} catch(e) { 
-			$scope.errorCustom('tablegroup error', e, resp); 
-			var tableGroups = null; 
+			$scope.errorCustom('tabifyAggResponse error! '+,e); 
 		}
-
 
 		var buckeroo = function(data,akey,bkey){
 		  for (var kxx in data) {
@@ -221,7 +219,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 
 //////////////// BUCKET SCANNER ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		try {
-			$scope.processTableGroups(tableGroups);
+			$scope.processTableGroups($scope.tableGroups);
 			buckeroo(resp.aggregations);
 		} catch(e) {
 	                $scope.errorCustom('OOps! Aggs to Graph error: '+e);
