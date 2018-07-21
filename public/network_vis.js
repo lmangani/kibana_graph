@@ -6,7 +6,7 @@ import 'ui/agg_table/agg_table_group';
 
 import { CATEGORY } from 'ui/vis/vis_category';
 import { VisFactoryProvider } from 'ui/vis/vis_factory';
-import { Schemas } from 'ui/vis/editors/default/schemas';
+import { VisSchemasProvider } from 'ui/vis/editors/default/schemas';
 import { VisTypesRegistryProvider } from 'ui/registry/vis_types';
 import image from './images/icon-network.svg';
 import networkVisTemplate from 'plugins/graph_vis/network_vis.html';
@@ -21,6 +21,7 @@ VisTypesRegistryProvider.register(NetworkVisTypeProvider);
 // define the TableVisType
 function NetworkVisTypeProvider(Private) {
   const VisFactory = Private(VisFactoryProvider);
+  const Schemas = Private(VisSchemasProvider);
 
   // return the visType object, which kibana will use to display and configure new
   // Vis object of this type.
