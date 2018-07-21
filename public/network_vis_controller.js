@@ -231,7 +231,8 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 			return;
 		}
 //////////////////////////////////////////////////////////Creation of the network with the library//////////////////////////////////////////////////////////
-                var nodesDataSet = new visN.DataSet(dataNodes);
+		console.log('Building Vis',dataNodes,dataEdges);
+		var nodesDataSet = new visN.DataSet(dataNodes);
                 var edgesDataSet = new visN.DataSet(dataEdges);
 
                 // Creation of the network
@@ -334,7 +335,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
                             break;
                 }
 		var options = angular.merge(options_1, options_2);    
-                console.log("Create aggs network now");
+                console.log("Create aggs network now",options);
                 var network = new visN.Network(container, data, options);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
