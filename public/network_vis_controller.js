@@ -132,14 +132,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 				console.log('no data for agg tabify!',$scope.vis,resp);
 			}
 			$scope.tableGroups = resp;
-			/*
-			$scope.tableGroups = tabifyAggResponse($scope.vis, resp, {
-			    canSplit: false,
-			    asAggConfigResults: true,
-			    partialRows: true
-			 });
-			*/
-			console.log('tabifyAggResponse result',$scope.tableGroups);
+			console.log('tableGroups ready! Scope is:',$scope);
 			
 		} catch(e) { 
 			$scope.errorCustom('tabifyAggResponse error! '+ e); 
@@ -225,7 +218,8 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 //////////////// BUCKET SCANNER ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		try {
 			$scope.processTableGroups($scope.tableGroups);
-			buckeroo(resp.aggregations);
+			// buckeroo(resp.aggregations);
+			buckeroo(resp.tables[0].rows);
 		} catch(e) {
 	                $scope.errorCustom('OOps! Aggs to Graph error: '+e);
 			return;
