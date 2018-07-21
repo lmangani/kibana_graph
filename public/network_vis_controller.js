@@ -109,7 +109,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 		var dataMetrics = $scope.dataMetrics = [];
 		    
 		$scope.processTableGroups = function(tableGroups) {
-		  console.log('Ingesting tableGroups...',tableGroups, req, searchSource);
+		  console.log('Ingesting tableGroups...',tableGroups, rawResponse);
 		  if (!tableGroups) return;
    		  tableGroups.tables.forEach(function (table) {
    		    table.rows.forEach(function (row, i) {
