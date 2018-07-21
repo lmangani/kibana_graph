@@ -67,7 +67,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
             p = p +22;
         }
     }
-    $scope.$watchMulti.call($scope, [ 'vis', 'searchSource.rawResponse','esResponse', 'vis.params.secondNodeColor'], function () {
+    $scope.$watchMulti.call([ 'vis', 'searchSource.rawResponse','esResponse', 'vis.params.secondNodeColor'], function () {
    // $scope.$watchMulti(['esResponse', 'vis.params.secondNodeColor', 'searchSource.rawResponse'], function ([resp]) {
 	    var resp = $scope.esResponse;
 	    $scope.table = null;
