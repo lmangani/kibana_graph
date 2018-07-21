@@ -67,7 +67,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
             p = p +22;
         }
     }
-    $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp, req]) {
+    $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor', 'req', 'searchSource'], function ([resp, secondNodeColor, req, searchSource]) {
 	  if (resp && $scope.vis ) {
           $timeout(function () {
             $("#loading").hide();
@@ -108,7 +108,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 		var dataMetrics = $scope.dataMetrics = [];
 		    
 		$scope.processTableGroups = function(tableGroups) {
-		  console.log('Ingesting tableGroups...',tableGroups, req);
+		  console.log('Ingesting tableGroups...',tableGroups, req, searchSource);
 		  if (!tableGroups) return;
    		  tableGroups.tables.forEach(function (table) {
    		    table.rows.forEach(function (row, i) {
