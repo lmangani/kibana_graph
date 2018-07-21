@@ -137,7 +137,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 			 console.log('tabifyAggResponse result',$scope.tableGroups);
 			
 		} catch(e) { 
-			$scope.errorCustom('tabifyAggResponse error! '+,e); 
+			$scope.errorCustom('tabifyAggResponse error! '+ e); 
 		}
 
 		var buckeroo = function(data,akey,bkey){
