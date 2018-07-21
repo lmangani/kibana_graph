@@ -1,6 +1,6 @@
 <img width=222 src="https://user-images.githubusercontent.com/1423657/35244908-15f41bd4-ffc2-11e7-9303-9a87a271d67a.png"/>
 
-## Graph Network Plugin for Kibana 6.X
+## Graph Network Plugin for Kibana 6.2.x
 
 Kibana plugin to Visualize aggregations as an interactive [VisJS](http://visjs.org/docs/network) Graph network of related nodes.
 
@@ -9,9 +9,13 @@ Kibana plugin to Visualize aggregations as an interactive [VisJS](http://visjs.o
 ### Git Install
 ```
 cd $KIBANA_HOME/plugins
-git clone https://github.com/lmangani/kbn_graph graph_vis -b 6.x
+git clone https://github.com/lmangani/kbn_graph graph_vis -b 6.2.x
 cd graph_vis
 npm install
+```
+### Create Kibana Plugin archive (zip)
+```
+./release.sh
 ```
 
 ### Usage
