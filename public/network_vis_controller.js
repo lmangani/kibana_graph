@@ -71,6 +71,8 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
    // $scope.$watchMulti(['esResponse', 'vis.params.secondNodeColor', 'searchSource.rawResponse'], function ([resp]) {
 	  if (!$scope.vis && (!$scope.searchSource && !$scope.searchSource.rawResponse) ) {
              $scope.table = null;
+	     $scope.errorCustom('No results from Tabify!',$scope.searchSource.rawResponse);
+	     $("#loading").hide();  
           } else if ($scope.esResponse && $scope.vis && $scope.searchSource ) {
             var resp = $scope.esResponse;
             $("#loading").hide();
@@ -128,14 +130,17 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
    		};
 
 		try {
-			console.log('Attempting Tabify',$scope.vis,$scope.searchSource);
+			$scope.errorCustom('Attempting Tabify',$scope.searchSource);
 			var tableGroups = tabifyAggResponse($scope.vis, $scope.searchSource.rawResponse, {
 			    canSplit: false,
 			    asAggConfigResults: true,
 			    partialRows: true
 			 });
 			
-		} catch(e) { $scope.errorCustom('tablegroup error', e, $scope.searchSource.rawResponse); var tableGroups = null; }
+		} catch(e) { 
+			$scope.errorCustom('tablegroup error', e, $scope.searchSource.rawResponse); 
+			var tableGroups = null; 
+		}
 
 
 		var buckeroo = function(data,akey,bkey){
