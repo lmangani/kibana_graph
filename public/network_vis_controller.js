@@ -125,13 +125,13 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
    		};
 
 		try {
-			var tableGroups = tabifyAggResponse($scope.vis, $scope.searchSource.rawResponse || resp, {
+			var tableGroups = tabifyAggResponse($scope.vis, resp || $scope.searchSource.rawResponse, {
 			    canSplit: false,
 			    asAggConfigResults: true,
 			    partialRows: true
 			 });
 			
-		} catch(e) { $scope.errorCustom('tablegroup error',e,  $scope.searchSource.rawResponse); }
+		} catch(e) { $scope.errorCustom('tablegroup error',e,  resp || $scope.searchSource.rawResponse); }
 
 
 		var buckeroo = function(data,akey,bkey){
