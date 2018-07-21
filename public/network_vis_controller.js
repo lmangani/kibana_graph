@@ -16,7 +16,7 @@ const ResizeSensor = require('css-element-queries/src/ResizeSensor');
 
 // add a controller to the module, which will transform the esResponse into a
 // tabular format that we can pass to the table directive
-module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
+module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, Private) {
     var network_id = "net_" + $scope.$id;
     var loading_id = "loading_" + $scope.$parent.$id;
 
@@ -67,9 +67,12 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
             p = p +22;
         }
     }
-    $scope.$watchMulti(['esResponse',  'vis.params.secondNodeColor', 'searchSource.rawResponse'], function ([resp]) {
+    $scope.$watchMulti(['esResponse',  'vis.params.secondNodeColor', 'searchSource.rawResponse'], function () {
    // $scope.$watchMulti(['esResponse', 'vis.params.secondNodeColor', 'searchSource.rawResponse'], function ([resp]) {
-	    if (resp||$scope.searchSource.rawResponse) {
+	  if (!$scope.vis && (!$scope.searchSource && !$scope.searchSource.rawResponse) ) {
+             $scope.table = null;
+          } else if ($scope.esResponse && $scope.vis && $scope.searchSource ) {
+            var resp = $scope.esResponse;
             $("#loading").hide();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////NODE-NODE-RELATION Type///////////////////////////////////////////////////////////////////
@@ -125,13 +128,14 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, Private) {
    		};
 
 		try {
-			var tableGroups = tabifyAggResponse($scope.vis, resp || $scope.searchSource.rawResponse, {
+			console.log('Attempting Tabify',$scope.vis,$scope.searchSource);
+			var tableGroups = tabifyAggResponse($scope.vis, $scope.searchSource.rawResponse, {
 			    canSplit: false,
 			    asAggConfigResults: true,
 			    partialRows: true
 			 });
 			
-		} catch(e) { $scope.errorCustom('tablegroup error',e,  resp || $scope.searchSource.rawResponse); }
+		} catch(e) { $scope.errorCustom('tablegroup error', e, $scope.searchSource.rawResponse); var tableGroups = null; }
 
 
 		var buckeroo = function(data,akey,bkey){
