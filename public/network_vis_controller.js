@@ -219,28 +219,19 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 //////////////// BUCKET SCANNER ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		try {
 			$scope.processTableGroups($scope.tableGroups);
-			if (rawResponse) buckeroo(rawResponse);
-			else buckeroo(resp.tables[0].rows);
+			buckeroo(rawResponse);
 		} catch(e) {
 	                $scope.errorCustom('OOps! Aggs to Graph error: '+e);
 			return;
 		}
 //////////////////////////////////////////////////////////Creation of the network with the library//////////////////////////////////////////////////////////
-		console.log('Building Vis',dataNodes,dataEdges);
-		    
-		var nodesDataSet = new visN.DataSet(dataNodes);
-                var edgesDataSet = new visN.DataSet(dataEdges);
-
+		
                 // Creation of the network
                 var container = document.getElementById(network_id);
                 //Set the Height
                 container.style.height = container.getBoundingClientRect().height;
                 container.height = container.getBoundingClientRect().height;
-                //Set the Data
-                var data = {
-                    nodes: nodesDataSet,
-                    edges: edgesDataSet
-                };
+                
                 //Set the Options
                 var options_1 = {
                     height: container.getBoundingClientRect().height.toString(),
@@ -276,6 +267,8 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
                         improvedLayout: false
                     }
                 }
+		var options_2 = {};
+		/*
 		switch ($scope.vis.params.posArrow) {
                         case 'from':
                             var options_2 = {
@@ -330,7 +323,18 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
                             };
                             break;
                 }
-		var options = angular.merge(options_1, options_2);    
+		*/
+		var options = angular.merge(options_1, options_2);
+		    
+		console.log('Building Vis',dataNodes,dataEdges);    
+		var nodesDataSet = new visN.DataSet(dataNodes);
+                var edgesDataSet = new visN.DataSet(dataEdges);
+		//Set the Data
+                var data = {
+                    nodes: nodesDataSet,
+                    edges: edgesDataSet
+                };
+
                 console.log("Create aggs network now",options);
                 var network = new visN.Network(container, data, options);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
