@@ -134,20 +134,15 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 				console.log('no data for agg tabify!',$scope.vis,resp);
 			}
 			$scope.tableGroups = tabifyAggResponse($scope.vis, resp);
-			console.log('tableGroups ready! Scope is:',$scope);
-			
-		} catch(e) { 
+			console.log('tableGroups ready!',$scope.tableGroups);
+		} catch(e) {
 			$scope.errorCustom('tabifyAggResponse error! '+ e); 
 		}
 
 		var buckeroo = function(data,akey,bkey){
-		  console.log('1:BUCKAROO',data,akey,bkey);
 		  for (var kxx in data) {
-		    console.log('2:BUCKAROO KEY',kxx);
 		    if (!data.hasOwnProperty(kxx)) continue;
 		    var agg = data[kxx];
-		    console.log('3:BUCKAROO AGG',agg);
-
 		    if (agg.key && agg.key.length>0) {
 
 			var found = dataNodes.some(function (el) {
@@ -223,8 +218,6 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 //////////////// BUCKET SCANNER ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		try {
 			$scope.processTableGroups($scope.tableGroups);
-			console.log('KICKOFF RAW',rawResponse);
-			console.log('KICKOFF AGGS',$scope.vis.aggs);
 			buckeroo(rawResponse);
 		} catch(e) {
 	                $scope.errorCustom('OOps! Aggs to Graph error: '+e);
@@ -331,8 +324,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
                 }
 		*/
 		var options = angular.merge(options_1, options_2);
-		    
-		console.log('Building Vis',dataNodes,dataEdges);    
+		console.log('Building Vis',dataNodes,dataEdges);
 		var nodesDataSet = new visN.DataSet(dataNodes);
                 var edgesDataSet = new visN.DataSet(dataEdges);
 		//Set the Data
@@ -340,8 +332,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
                     nodes: nodesDataSet,
                     edges: edgesDataSet
                 };
-
-                console.log("Create aggs network now",options);
+                console.log("Create aggs network now",container,data,options);
                 var network = new visN.Network(container, data, options);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
