@@ -31,7 +31,7 @@ function NetworkVisTypeProvider(Private) {
     image,
     description: 'Displays a network node that link two fields that have been selected.',
     category: CATEGORY.OTHER,
-
+    responseHandler: 'none',
     visConfig: {
       defaults: {
         showLabels: true,
@@ -93,7 +93,7 @@ function NetworkVisTypeProvider(Private) {
     responseHandlerConfig: {
       asAggConfigResults: true
     },
-    ////////MIRAR THIS
+    //////// show partial data
     hierarchicalData: function (vis) {
       return true;
     },

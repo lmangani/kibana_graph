@@ -69,7 +69,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
     }
     $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp, secondNodeColor]) {
 	if (resp && $scope.vis ) {
-	  var rawResponse = $scope.vis.aggs.toDsl();
+	  var rawResponse = resp;
           $timeout(function () {
             $("#loading").hide();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,13 +126,14 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 			});
 		    });
    		  });
+		  console.log('DATAMETRICS',dataMetrics);
    		};
 
 		try {
 			if (!$scope.vis && !resp) {
 				console.log('no data for agg tabify!',$scope.vis,resp);
 			}
-			$scope.tableGroups = resp;
+			$scope.tableGroups = tabifyAggResponse($scope.vis, resp);
 			console.log('tableGroups ready! Scope is:',$scope);
 			
 		} catch(e) { 
@@ -140,9 +141,12 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 		}
 
 		var buckeroo = function(data,akey,bkey){
+		  console.log('1:BUCKAROO',data,akey,bkey);
 		  for (var kxx in data) {
+		    console.log('2:BUCKAROO KEY',kxx);
 		    if (!data.hasOwnProperty(kxx)) continue;
 		    var agg = data[kxx];
+		    console.log('3:BUCKAROO AGG',agg);
 
 		    if (agg.key && agg.key.length>0) {
 
@@ -219,6 +223,8 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
 //////////////// BUCKET SCANNER ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		try {
 			$scope.processTableGroups($scope.tableGroups);
+			console.log('KICKOFF RAW',rawResponse);
+			console.log('KICKOFF AGGS',$scope.vis.aggs);
 			buckeroo(rawResponse);
 		} catch(e) {
 	                $scope.errorCustom('OOps! Aggs to Graph error: '+e);
