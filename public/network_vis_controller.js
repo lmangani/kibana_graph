@@ -68,7 +68,7 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
         }
     }
     $scope.$parent.$watchMulti(['esResponse', 'vis.params.secondNodeColor'], function ([resp, secondNodeColor]) {
-	if (resp && $scope.vis ) {
+	if (resp) {
 	  var rawResponse = resp;
           $timeout(function () {
             $("#loading").hide();
@@ -475,11 +475,14 @@ module.controller('KbnNetworkVisController', function ($scope, $sce, $timeout, P
      			});
 		}
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            }else{
+            } else if($scope.vis.aggs.bySchemaName['first'] && $scope.vis.aggs.bySchemaName['first'].length < 1){
 		$scope.errorCustom('Error: Please select at least one Node',1);
+            } else {
+            	$("#loading").hide();
+		return;
             }
-		  
-	  // $timeout tail	  
+
+	  // $timeout tail
 	  });
         }
     });
